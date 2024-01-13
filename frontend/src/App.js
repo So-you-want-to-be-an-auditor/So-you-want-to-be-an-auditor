@@ -1,3 +1,4 @@
+
 import './App.css';
 import TypingEffect from './components/Typing/TypingEffect';
 import { AnimatePresence } from 'framer-motion';
@@ -39,7 +40,10 @@ function App() {
         }, [play]);
   return (
     <div className="App">
+<<<<<<< HEAD
       <div className="main-audio" onClick={()=>setPlay((play)=>!play)}>{play ? <FaVolumeUp /> : <FaVolumeMute />} </div>
+=======
+>>>>>>> fcf20f3df2d567dc8f365ff52bfc9fcd8332e759
 
       <AnimatePresence mode='wait'>
         
