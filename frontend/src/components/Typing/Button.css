@@ -1,6 +1,5 @@
 .custom-button {
     padding: 10px 20px;
-    font-size: 16px;
     color: #000000;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
     cursor: pointer;
@@ -12,6 +11,15 @@
     font-weight: bold;
     border-radius: 5px;
     background-color: #346e02;
+    margin: 50px auto;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 25px;
+    /* font-size: 1.2vw !important; */
+    font-size: clamp(2vw, 2.2vw, 2.2vw);
+    cursor: pointer;
+
+
   }
   
   .custom-button::after {

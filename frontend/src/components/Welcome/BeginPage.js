@@ -2,11 +2,13 @@ import { Typography, Modal, Button, Box } from "@mui/material"
 import { useState } from "react"
 import './BeginPage.css'
 import TaxForm from './taxForm.svg'
-
+import transition from "../Typing/transition"
 //'So', 'you', 'want', 'to', 'be '
 //So you want to be
+import {  useNavigate} from "react-router-dom"
 
-export default function BeginPage(){
+ function BeginPage(){
+    const navigate = useNavigate();
 
     const titleArr = ['So', 'you', 'want', 'to', 'be ']
     const titleArrTwo = ['an', 'auditor...']
@@ -54,7 +56,9 @@ export default function BeginPage(){
                 ))}
             </div>
 
-            <Button variant='contained' sx={{margin: '10px', 
+            <Button
+            onClick ={()=>navigate("/story")}
+            variant='contained' sx={{margin: '10px', 
             boxShadow: '4px 4px 4px grey',
             backgroundColor:'#f6da74',
             border: '2px solid black',
@@ -146,3 +150,5 @@ export default function BeginPage(){
 
     )
 }
+
+export default transition(BeginPage);
