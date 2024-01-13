@@ -23,7 +23,7 @@
     transition: opacity 0.3s ease;
   }
   
-  /* .custom-button:active::after {
+  .custom-button:active::after {
     opacity: 1;
-  } */
+  }
   
