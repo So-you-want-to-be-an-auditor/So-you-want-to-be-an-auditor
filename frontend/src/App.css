@@ -24,3 +24,12 @@
   background: black;
   transform-origin: top;
 }
+
+.main-audio {
+  font-size: clamp(25px, 3vw, 40px);
+  position: fixed;
+  left: auto;
+  top: 20px;
+  right:12%;
+  cursor: pointer;
+}

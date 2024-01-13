@@ -6,6 +6,7 @@ import transition from "../Typing/transition"
 //'So', 'you', 'want', 'to', 'be '
 //So you want to be
 import {  useNavigate} from "react-router-dom"
+import mouse from "../../sound/mouse.mp3";
 
  function BeginPage(){
     const navigate = useNavigate();
@@ -16,12 +17,18 @@ import {  useNavigate} from "react-router-dom"
     const [isOpen, setIsOpen] = useState(false)
 
     const openModal = () => {
-        setIsOpen(true)
+        setIsOpen(true);
+        audio.play();
     }
 
     const closeModal = () => {
-        setIsOpen(false)
+        setIsOpen(false);
+        audio.play()
     }
+
+    const audio = new Audio(mouse);
+
+
 
     return (
         <div className="PageBackground">
@@ -57,7 +64,9 @@ import {  useNavigate} from "react-router-dom"
             </div>
 
             <Button
-            onClick ={()=>navigate("/story")}
+            onClick ={()=>{
+                navigate("/story"); 
+                audio.play();}}
             variant='contained' sx={{margin: '10px', 
             boxShadow: '4px 4px 4px grey',
             backgroundColor:'#f6da74',
@@ -69,7 +78,10 @@ import {  useNavigate} from "react-router-dom"
             height:'7%', fontSize:'120%'}}>
                 Start
             </Button>
-            <Button variant='contained' onClick={openModal} sx={{margin: '10px', 
+            <Button 
+            
+            
+            variant='contained' onClick={openModal} sx={{margin: '10px', 
             backgroundColor:'#f6da74',
             border: '2px solid black',
             color:'black',
