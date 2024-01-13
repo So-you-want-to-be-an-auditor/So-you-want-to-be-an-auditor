@@ -1,3 +1,4 @@
+
 import './App.css';
 import TypingEffect from './components/Typing/TypingEffect';
 import { AnimatePresence } from 'framer-motion';
@@ -17,6 +18,7 @@ function App() {
         const location = useLocation();
   return (
     <div className="App">
+
       <AnimatePresence mode='wait'>
         
       <Routes location={location} key={location.pathname} >
