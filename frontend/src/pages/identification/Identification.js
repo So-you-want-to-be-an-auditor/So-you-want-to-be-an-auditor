@@ -6,6 +6,7 @@ import Popper from "@mui/material/Popper";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import "../../index.css";
+import "../../components/Welcome/BeginPage.css";
 
 const correctAnswers = {
   firstname: "Mona",
@@ -31,7 +32,7 @@ const Identification = () => {
     { id: "prov", text: "Prov./Terr.", answer: "", isCorrect: true },
     {
       id: "sin",
-      text: "Social Insurance Number (SIN)",
+      text: "Social Insurance Number",
       answer: "",
       isCorrect: true,
     },
@@ -121,15 +122,15 @@ const Identification = () => {
   };
 
   return (
-    <div className="pattern-background overflow-y-auto">
-      <p className="level-title text-7xl pt-12 pb-4">
+    <div className="PageBackground overflow-y-auto">
+      <p className="level-title bordered-text text-7xl pt-12 pb-4 text-center">
         Level One - Identification
       </p>
       <div className="flex justify-center items-center gap-x-12">
         <DragDropContext onDragEnd={onDragEnd}>
-          <div className="bg-[#fcfdf7] text-white b-8 pb-8 w-1/3 h-[70vh] rounded-2xl custom-shadow">
-            <div className="bg-[#FEC6C2] rounded-t-2xl w-full p-4 text-lg">
-              Step1 - Identification and Other Information
+          <div className="bg-[#fcfdf7] text-black b-8 pb-8 w-1/3 h-[70vh] rounded-2xl custom-shadow">
+            <div className="bg-[#f6da74] rounded-t-2xl w-full p-4 form-font text-lg ">
+              Step 1 - Identification and Other Information
             </div>
             <div className="flex flex-wrap px-4 m-8 text-lg">
               {" "}
@@ -141,7 +142,9 @@ const Identification = () => {
                       {...provided.droppableProps}
                       className="flex-1 min-w-[50%]"
                     >
-                      <h3 className="text-black">{question.text}</h3>
+                      <h3 className="text-black form-font text-md">
+                        {question.text}
+                      </h3>
                       <div
                         style={{ display: "flex", alignItems: "center" }}
                         className="my-6"
@@ -158,7 +161,7 @@ const Identification = () => {
                               display: "flex",
                               alignItems: "center",
                             }}
-                            className="text-black"
+                            className="text-black form-font text-sm"
                           >
                             {question.answer || "Drag Your Choice to Here"}
                           </div>
@@ -201,7 +204,7 @@ const Identification = () => {
           <div class="flex flex-col items-center py-8 ">
             {/* Answer container */}
             <div className="bg-[#fcfdf7] text-white b-8  rounded-2xl custom-shadow">
-              <div className="bg-[#FEC6C2] rounded-t-2xl text-lg w-full p-4">
+              <div className="bg-[#f6da74] rounded-t-2xl text-lg w-full p-4 form-font">
                 Basic Information
               </div>
               <div className="flex justify-start items-start mt-4 mb-8 mx-8 text-lg">
@@ -230,7 +233,10 @@ const Identification = () => {
                         }}
                       >
                         <div className="px-2">
-                          <p className="text-black"> Surname</p>
+                          <p className="text-black form-font text-sm">
+                            {" "}
+                            Surname
+                          </p>
                           <Draggable
                             key={answers[0].id}
                             draggableId={answers[0].id}
@@ -251,7 +257,7 @@ const Identification = () => {
                                   zIndex: 1000,
                                   textAlign: "left",
                                 }}
-                                className="text-black"
+                                className="text-black form-font text-sm"
                               >
                                 {answers[0].content}
                               </div>
@@ -261,7 +267,10 @@ const Identification = () => {
                         </div>
 
                         <div className="px-2">
-                          <p className="text-black"> Given Names</p>
+                          <p className="text-black form-font text-sm">
+                            {" "}
+                            Given Names
+                          </p>
                           <Draggable
                             key={answers[1].id}
                             draggableId={answers[1].id}
@@ -282,7 +291,7 @@ const Identification = () => {
                                   zIndex: 1000,
                                   textAlign: "left",
                                 }}
-                                className="text-black"
+                                className="text-black form-font text-sm"
                               >
                                 {answers[1].content}
                               </div>
@@ -292,7 +301,10 @@ const Identification = () => {
                         </div>
 
                         <div className="px-2">
-                          <p className="text-black"> Date of Birth</p>
+                          <p className="text-blac form-font text-sm">
+                            {" "}
+                            Date of Birth
+                          </p>
                           <Draggable
                             key={answers[3].id}
                             draggableId={answers[3].id}
@@ -313,7 +325,7 @@ const Identification = () => {
                                   zIndex: 1000,
                                   textAlign: "left",
                                 }}
-                                className="text-black"
+                                className="text-black form-font text-sm"
                               >
                                 {answers[3].content}
                               </div>
@@ -323,7 +335,10 @@ const Identification = () => {
                         </div>
 
                         <div className="px-2 ">
-                          <p className="text-black"> Place of Birth</p>
+                          <p className="text-black form-font text-sm">
+                            {" "}
+                            Place of Birth
+                          </p>
                           <Draggable
                             key={answers[4].id}
                             draggableId={answers[4].id}
@@ -344,7 +359,7 @@ const Identification = () => {
                                   zIndex: 1000,
                                   textAlign: "left",
                                 }}
-                                className="text-black"
+                                className="text-black form-font text-sm"
                               >
                                 {answers[4].content}
                               </div>
@@ -353,7 +368,10 @@ const Identification = () => {
                           {provided.placeholder}{" "}
                         </div>
                         <div className="px-2 w-full">
-                          <p className="text-black"> Where You Live</p>
+                          <p className="text-black form-font text-sm">
+                            {" "}
+                            Where You Live
+                          </p>
                           <Draggable
                             key={answers[5].id}
                             draggableId={answers[5].id}
@@ -374,7 +392,7 @@ const Identification = () => {
                                   zIndex: 1000,
                                   textAlign: "left",
                                 }}
-                                className="text-black"
+                                className="text-black form-font text-sm"
                               >
                                 {answers[5].content}
                               </div>
@@ -383,7 +401,7 @@ const Identification = () => {
                           {provided.placeholder}{" "}
                         </div>
                         <div className="px-2">
-                          <p className="text-black"> City</p>
+                          <p className="text-black form-font text-sm"> City</p>
                           <Draggable
                             key={answers[6].id}
                             draggableId={answers[6].id}
@@ -404,7 +422,7 @@ const Identification = () => {
                                   zIndex: 1000,
                                   textAlign: "left",
                                 }}
-                                className="text-black"
+                                className="text-black form-font text-sm"
                               >
                                 {answers[6].content}
                               </div>
@@ -413,7 +431,10 @@ const Identification = () => {
                           {provided.placeholder}{" "}
                         </div>
                         <div className="px-2">
-                          <p className="text-black"> Province</p>
+                          <p className="text-black form-font text-sm">
+                            {" "}
+                            Province
+                          </p>
                           <Draggable
                             key={answers[7].id}
                             draggableId={answers[7].id}
@@ -434,7 +455,7 @@ const Identification = () => {
                                   zIndex: 1000,
                                   textAlign: "left",
                                 }}
-                                className="text-black"
+                                className="text-black form-font text-sm"
                               >
                                 {answers[7].content}
                               </div>
@@ -451,7 +472,7 @@ const Identification = () => {
 
             {/* SIN Info  */}
             <div className="bg-[#fcfdf7] text-white mt-12 w-full rounded-2xl custom-shadow">
-              <div className="bg-[#FEC6C2] rounded-t-2xl text-lg w-full p-4">
+              <div className="bg-[#f6da74] rounded-t-2xl text-lg w-full p-4 form-font text-md">
                 Social Insurance Number
               </div>
               <Droppable
@@ -485,7 +506,7 @@ const Identification = () => {
                                 ...provided.draggableProps.style,
                                 zIndex: 1000,
                               }}
-                              className="text-black text-lg"
+                              className="text-black form-font text-sm"
                             >
                               {answer.content}
                             </div>
@@ -501,7 +522,8 @@ const Identification = () => {
           </div>
         </DragDropContext>
       </div>
-      <div className="flex justify-end">
+
+      <div className="flex justify-end w-full">
         <div>
           {" "}
           <div>
@@ -513,8 +535,12 @@ const Identification = () => {
 
         <div className="px-8">
           {" "}
-          <Button onClick={handleSubmit} variant="contained">
-            Submit
+          <Button
+            onClick={handleSubmit}
+            style={{ backgroundColor: "#f6da74", color: "black" }}
+            size="large"
+          >
+            <p className="form-font text-sm"> Submit</p>
           </Button>
         </div>
       </div>
