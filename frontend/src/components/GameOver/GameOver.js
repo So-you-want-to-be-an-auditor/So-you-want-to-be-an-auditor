@@ -5,8 +5,8 @@ import { Typography, Button } from '@mui/material'
 import { useEffect, useState } from 'react'
 import {  useNavigate } from "react-router-dom"
 import mouse from "../../sound/mouse.mp3"
-
-export default function GameOver() {
+import transition from '../Typing/transition'
+ function GameOver() {
 
     const navigate = useNavigate();
 
@@ -57,3 +57,5 @@ export default function GameOver() {
         </div>
     )
 }
+
+export default transition(GameOver);

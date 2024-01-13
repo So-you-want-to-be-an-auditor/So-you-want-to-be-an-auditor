@@ -9,6 +9,7 @@ const ChatBox = ({messages, setMessages, inputText, setInputText, loading, setLo
   const handleInputChange = event => {
     setInputText(event.target.value);
   };
+  
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -21,12 +22,13 @@ const ChatBox = ({messages, setMessages, inputText, setInputText, loading, setLo
       try {
         setLoading(true); // Start loading
         const response = await axios.post(
-          'http://127.0.0.1:8000/v1/query',
+          'http://localhost:8000/v1/query',
           {
             query: inputText,
             time_stamp: "1705166849"
           }
         );
+        console.log("response:", response);
 
         const aiResponse = response.data.answer;
         setMessages(prevMessages => [
