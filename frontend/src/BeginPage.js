@@ -3,10 +3,12 @@ import { useState } from "react"
 import './BeginPage.css'
 import TaxForm from './taxForm.svg'
 
+//'So', 'you', 'want', 'to', 'be '
+//So you want to be
 
 export default function BeginPage(){
 
-    const titleArr = ['So ', 'you ', 'want ', 'to ', 'be ']
+    const titleArr = ['So', 'you', 'want', 'to', 'be ']
     const titleArrTwo = ['an', 'auditor...']
 
     const [isOpen, setIsOpen] = useState(false)
@@ -26,10 +28,13 @@ export default function BeginPage(){
             justifyContent: 'space-between', 
             alignItems: 'center'}}>
                 {titleArr.map((title, index) => (
-                    <div key={index} style={{ marginRight: '5%' }}>
-                        <Typography variant='h1' style={{fontFamily:'bigGameCustom',textShadow: '4px 4px 0px #600000', color:'#d40000'}}>
+                    <div key={index} style={{ marginRight:'5%' }} className="text-rotate">
+                        <Typography  variant='h1' style={{fontFamily:'bigGameCustom',
+                        textShadow: '4px 4px 0px #600000', 
+                        color:'#dc0000'}}>
                             {title} 
                         </Typography>
+                        
                     </div>
                 ))}
             </div>
@@ -39,8 +44,10 @@ export default function BeginPage(){
             justifyContent: 'space-between', 
             alignItems: 'center'}}>
                 {titleArrTwo.map((title, index) => (
-                    <div key={index} style={{ marginRight: '5%' }}>
-                        <Typography variant='h1' style={{fontFamily:'bigGameCustom',textShadow: '4px 4px 0px #600000', color:'#d40000'}}>
+                    <div key={index} style={{ marginRight: '5%' }} className="text-rotate-two">
+                        <Typography variant='h1' style={{fontFamily:'bigGameCustom',
+                        textShadow: '4px 4px 0px #600000', 
+                        color:'#dc0000'}}>
                             {title} 
                         </Typography>
                     </div>
@@ -79,7 +86,9 @@ export default function BeginPage(){
                 left: '80%'}}
                 className="tax-effect"/>
             
-            <Modal open={isOpen} sx={{display: 'flex', alignItems:'center', justifyContent:'center'}}>
+            <Modal open={isOpen} sx={{display: 'flex', 
+            alignItems:'center', 
+            justifyContent:'center'}}>
                 <Box sx={{backgroundColor:'white', height: '80%', width:'75%', 
                 border:'4px solid black',
                 display: 'flex', justifyContent:'center',
