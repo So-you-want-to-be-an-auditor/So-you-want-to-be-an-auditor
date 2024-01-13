@@ -17,6 +17,7 @@ import BeginPage from './components/Welcome/BeginPage';
 import { FaVolumeUp, FaVolumeMute  } from "react-icons/fa";
 import Sweet from "./sound/Sweet.mp3";
 import {useState, useEffect} from "react";
+import Identification from './pages/identification/Identification'
 function App() {
         const location = useLocation();
         const [play, setPlay] = useState(false);
@@ -40,16 +41,13 @@ function App() {
         }, [play]);
   return (
     <div className="App">
-<<<<<<< HEAD
       <div className="main-audio" onClick={()=>setPlay((play)=>!play)}>{play ? <FaVolumeUp /> : <FaVolumeMute />} </div>
-=======
->>>>>>> fcf20f3df2d567dc8f365ff52bfc9fcd8332e759
-
       <AnimatePresence mode='wait'>
         
       <Routes location={location} key={location.pathname} >
           <Route index element= {<BeginPage />} />
           <Route path="/story" element= { <Story />} />
+          <Route path="/level1" element= { <Identification />} />
         </Routes>
 
       </AnimatePresence>
