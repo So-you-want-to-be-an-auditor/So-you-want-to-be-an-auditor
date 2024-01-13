@@ -17,7 +17,7 @@ const Button = () => {
       animate={{ scale: isClicked ? 1.1 : 1 }}
       onClick={handleClick}
     >
-      Click Me
+      Next
     </motion.button>
   );
 };
