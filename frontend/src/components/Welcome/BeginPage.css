@@ -1,70 +1,69 @@
 @font-face {
-    font-family: 'bigGameCustom';
-    src: url('fonts/GamepauseddemoRegular-RpmY6.otf') format('opentype');
+  font-family: "bigGameCustom";
+  src: url("fonts/GamepauseddemoRegular-RpmY6.otf") format("opentype");
 }
 
 @font-face {
-    font-family: 'smallTypewriter';
-    src: url('fonts/JMH Typewriter-Black.otf') format('opentype');
+  font-family: "smallTypewriter";
+  src: url("fonts/JMH Typewriter-Black.otf") format("opentype");
 }
 
 .PageBackground {
-    height: 100vh;
-    width: 100vw;
-    min-width: 360px;
-    background-image: url("bgImgWelc.png");
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    perspective: 1000px;
-    perspective-origin: 50% 50%;
-    animation: flow-effect 100s ease infinite;
+  height: 100vh;
+  width: 100vw;
+  min-width: 360px;
+  background-size: cover;
+  background-image: url("bgImgWelc.png");
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+  perspective-origin: 50% 50%;
+  animation: flow-effect 100s ease infinite;
 }
 
 @keyframes flow-effect {
-    
-    100% {
-        background-position: 0px -400%;
-        
-      }
+  100% {
+    background-position: 0px -400%;
+  }
 }
 
-.tax-effect{
-    animation: tax-rotation 2s ease infinite;
+.tax-effect {
+  animation: tax-rotation 2s ease infinite;
 }
-@keyframes tax-rotation{
-    0% {
-        transform: rotate(-15deg);
-    }
-    50%{
-        transform: rotate(15deg);
-    }
-    100%{
-        transform: rotate(-15deg);
-    }
-}
-
-.text-rotate{
-    animation-name: spin;
-    animation-duration: 1s;
-    animation-timing-function: ease;
-    animation-iteration-count: 1;
+@keyframes tax-rotation {
+  0% {
+    transform: rotate(-15deg);
+  }
+  50% {
+    transform: rotate(15deg);
+  }
+  100% {
+    transform: rotate(-15deg);
+  }
 }
 
-.text-rotate-two{
-    animation-name: spin;
-    animation-duration: 1s;
-    animation-timing-function: ease;
-    animation-iteration-count: 1;
-    animation-delay: 500ms;
+.text-rotate {
+  animation-name: spin;
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
+}
+
+.text-rotate-two {
+  animation-name: spin;
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
+  animation-delay: 500ms;
 }
 
 @keyframes spin {
-    from {
-        transform:rotate(0deg);
-    }
-    to {
-        transform:rotate(360deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

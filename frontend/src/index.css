@@ -42,6 +42,11 @@ code {
   color: rgb(246, 218, 116);
 }
 
+.level2-title {
+  font-family: "Game Pause", sans-serif;
+  color: #fb9788;
+}
+
 .bordered-text {
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000;
@@ -55,3 +60,18 @@ code {
 .custom-shadow {
   box-shadow: 15px 15px 0 rgb(212, 215, 211);
 }
+
+/* .PageBackground {
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  min-width: 360px;
+  background-image: url("bgImgWelc.png");
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+  perspective-origin: 50% 50%;
+  animation: flow-effect 100s ease infinite;
+} */

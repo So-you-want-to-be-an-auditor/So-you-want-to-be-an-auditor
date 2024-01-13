@@ -12,7 +12,7 @@ const correctAnswers = {
   firstname: "Mona",
   lastname: "Lisa",
   "mailing-address": "1479 Mona Lisa Street",
-  city: "Florence ITA",
+  city: "London",
   prov: "Ontario",
   sin: "900700500",
   birth: "15 Jun/Juin 1479",
@@ -122,13 +122,13 @@ const Identification = () => {
   };
 
   return (
-    <div className="PageBackground overflow-y-auto">
-      <p className="level-title bordered-text text-7xl pt-12 pb-4 text-center">
+    <div className="PageBackground overflow-y-auto overflow-x-auto">
+      <p className="level-title bordered-text text-7xl pt-4 pb-4 md:pt-[25vh] md:pb-4">
         Level One - Identification
       </p>
       <div className="flex justify-center items-center gap-x-12">
         <DragDropContext onDragEnd={onDragEnd}>
-          <div className="bg-[#fcfdf7] text-black b-8 pb-8 w-1/3 h-[70vh] rounded-2xl custom-shadow">
+          <div className="bg-[#fcfdf7] text-black b-8 pb-8 w-1/3 h-[70vh] rounded-2xl custom-shadow overflow-y-auto">
             <div className="bg-[#f6da74] rounded-t-2xl w-full p-4 form-font text-lg ">
               Step 1 - Identification and Other Information
             </div>
@@ -156,7 +156,7 @@ const Identification = () => {
                               marginRight: 8,
                               border: "1px solid #ccc",
                               borderRadius: "4px",
-                              padding: "5px 10px",
+                              padding: "1vh 2vh",
                               backgroundColor: "#fff",
                               display: "flex",
                               alignItems: "center",
@@ -523,7 +523,7 @@ const Identification = () => {
         </DragDropContext>
       </div>
 
-      <div className="flex justify-end w-full">
+      <div className="flex justify-end w-full py-4 px-4">
         <div>
           {" "}
           <div>

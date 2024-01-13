@@ -6,47 +6,52 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
-  Route, 
-  Routes, useLocation
-} from "react-router-dom";// Corrected import statement
-import Button from './components/Typing/Button';
-import Story from './components/Story/Story';
-import Dragging from './components/Typing/Dragging';
-import BeginPage from './components/Welcome/BeginPage';
-import { FaVolumeUp, FaVolumeMute  } from "react-icons/fa";
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom"; // Corrected import statement
+import Button from "./components/Typing/Button";
+import Story from "./components/Story/Story";
+import Dragging from "./components/Typing/Dragging";
+import BeginPage from "./components/Welcome/BeginPage";
+import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import Sweet from "./sound/Sweet.mp3";
-import {useState, useEffect} from "react";
-import Identification from './pages/identification/Identification'
-function App() {
-        const location = useLocation();
-        const [play, setPlay] = useState(false);
+import { useState, useEffect } from "react";
+import Identification from "./pages/identification/Identification";
+import Donations from "./pages/donations/Donations";
 
-        useEffect(() => {
-          const audio = new Audio(Sweet);
-      
-          if (play) {
-            audio.play();
-            audio.loop = true;
-          } else {
-            audio.pause();
-            audio.currentTime = 0;
-          }
-      
-          // Cleanup when the component is unmounted
-          return () => {
-            audio.pause();
-            audio.currentTime = 0;
-          };
-        }, [play]);
+function App() {
+  const location = useLocation();
+  const [play, setPlay] = useState(false);
+
+  useEffect(() => {
+    const audio = new Audio(Sweet);
+
+    if (play) {
+      audio.play();
+      audio.loop = true;
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+
+    // Cleanup when the component is unmounted
+    return () => {
+      audio.pause();
+      audio.currentTime = 0;
+    };
+  }, [play]);
   return (
     <div className="App">
-      <div className="main-audio" onClick={()=>setPlay((play)=>!play)}>{play ? <FaVolumeUp /> : <FaVolumeMute />} </div>
-      <AnimatePresence mode='wait'>
-        
-      <Routes location={location} key={location.pathname} >
-          <Route index element= {<BeginPage />} />
-          <Route path="/story" element= { <Story />} />
-          <Route path="/level1" element= { <Identification />} />
+      <div className="main-audio" onClick={() => setPlay((play) => !play)}>
+        {play ? <FaVolumeUp /> : <FaVolumeMute />}{" "}
+      </div>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route index element={<BeginPage />} />
+          <Route path="/story" element={<Story />} />
+          <Route path="/level1" element={<Identification />} />
+          <Route path="level2" element={<Donations />} />
         </Routes>
       </AnimatePresence>
     </div>
