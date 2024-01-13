@@ -18,6 +18,7 @@ import Sweet from "./sound/Sweet.mp3";
 import {useState, useEffect} from "react";
 import Identification from './pages/identification/Identification'
 import ChatBox from "./components/Chatbox/Chatbox";
+import GameOver from "./components/GameOver/GameOver";
 function App() {
         const firstMessage ="Hello, I'm a Tax Advisor, how can I help you today?";
 
@@ -81,6 +82,7 @@ function App() {
           <Route index element= {<BeginPage />} />
           <Route path="/story" element= { <Story />} />
           <Route path="/level1" element= { <Identification />} />
+          <Route path="/gameover" element ={<GameOver />} />
         </Routes>
       </AnimatePresence>
     </div>
