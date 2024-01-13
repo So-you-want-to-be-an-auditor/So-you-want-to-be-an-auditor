@@ -21,9 +21,10 @@ const ChatBox = ({messages, setMessages, inputText, setInputText, loading, setLo
       try {
         setLoading(true); // Start loading
         const response = await axios.post(
-          'https://memoritoo-server.onrender.com/vnhub',
+          'http://127.0.0.1:8000/v1/query',
           {
-            message: inputText,
+            query: inputText,
+            time_stamp: "1705166849"
           }
         );
 
