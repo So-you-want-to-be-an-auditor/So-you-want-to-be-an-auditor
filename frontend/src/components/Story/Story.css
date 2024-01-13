@@ -16,7 +16,7 @@ h1 {
     font-weight: bold;
 
     animation:blinking 5s infinite;
-    text-shadow: 2px 2px #a78c05;
+    text-shadow: 2px 2px #600000;
     margin-top: 0;
     margin:10px auto;
     
@@ -42,7 +42,7 @@ h1 {
 }
 
 @keyframes blinking{
-    0%{   color: rgb(142, 95, 7);   }
+    0%{   color: #600000;   }
     47%{   color: #000000; }
     62%{   color: transparent; }
     97%{   color:transparent; }

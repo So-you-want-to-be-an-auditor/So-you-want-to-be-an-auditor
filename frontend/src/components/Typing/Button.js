@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import "./Button.css"
+import mouse from "../../sound/mouse.mp3";
+import { useNavigate } from 'react-router';
 const Button = () => {
   const [isClicked, setIsClicked] = useState(false);
-
+  const audio = new Audio(mouse);
+  const navigate = useNavigate();
   const handleClick = () => {
     setIsClicked(!isClicked);
+    audio.play();
+    navigate("../level1");
   };
 
   return (
