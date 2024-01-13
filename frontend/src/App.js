@@ -6,15 +6,14 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom"; // Corrected import statement
-import Button from "./components/Typing/Button";
-import Story from "./components/Story/Story";
-import Dragging from "./components/Typing/Dragging";
-import BeginPage from "./components/Welcome/BeginPage";
-import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
+  Route, 
+  Routes, useLocation
+} from "react-router-dom";// Corrected import statement
+import Button from './components/Typing/Button';
+import Story from './components/Story/Story';
+import Dragging from './components/Typing/Dragging';
+import BeginPage from './components/Welcome/BeginPage';
+import { FaVolumeUp, FaVolumeMute  } from "react-icons/fa";
 import Sweet from "./sound/Sweet.mp3";
 import {useState, useEffect} from "react";
 import Identification from './pages/identification/Identification'
@@ -38,12 +37,24 @@ function App() {
 
         const location = useLocation();
         const [play, setPlay] = useState(false);
-    // Cleanup when the component is unmounted
-    return () => {
-      audio.pause();
-      audio.currentTime = 0;
-    };
-  }, [play]);
+
+        useEffect(() => {
+          const audio = new Audio(Sweet);
+      
+          if (play) {
+            audio.play();
+            audio.loop = true;
+          } else {
+            audio.pause();
+            audio.currentTime = 0;
+          }
+      
+          // Cleanup when the component is unmounted
+          return () => {
+            audio.pause();
+            audio.currentTime = 0;
+          };
+        }, [play]);
   return (
     <div className="App">
       <div className="main-audio" onClick={()=>setPlay((play)=>!play)}>{play ? <FaVolumeUp /> : <FaVolumeMute />} </div>
