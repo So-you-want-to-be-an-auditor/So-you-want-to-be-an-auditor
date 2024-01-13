@@ -2,61 +2,32 @@
 # https://redis.io/docs/get-started/vector-database/
 # https://medium.com/@dan_43009/how-to-give-your-chatbot-more-memory-f5d64dbd2a3c
 # https://redis-py.readthedocs.io/en/stable/examples/search_vector_similarity_examples.html
+import hashlib
 import os
 import dotenv
 import requests
-import json
-import time
-
-import numpy as np
-import pandas as pd
 import redis
-from redis.commands.search.field import (
-    NumericField,
-    TagField,
-    TextField,
-    VectorField,
-)
+from redis.commands.search.field import TagField, VectorField, TextField
 from redis.commands.search.indexDefinition import IndexDefinition, IndexType
 from redis.commands.search.query import Query
-from sentence_transformers import SentenceTransformer
+import numpy as np
 from textSplitter import *
 import tiktoken
 
 dotenv.load_dotenv()
 
 CF_API_KEY = os.environ["CLOUDFLARE_API_KEY"]
+CLOUDFLARE_ACCOUNT_ID = os.environ["CLOUDFLARE_ACCOUNT_ID"]
 API_BASE_URL = os.environ["API_BASE_URL"]
 REDIS_HOST = os.environ["REDIS_HOST"]
 REDIS_PORT = os.environ["REDIS_PORT"]
 REDIS_PASSWORD = os.environ["REDIS_PASSWORD"]
 headers = {"Authorization": f"Bearer {CF_API_KEY}"}
-# INFORMATION_INDEX = "idx:information_vss"
 INFORMATION_INDEX = "information"
+VECTOR_DIMENSIONS = 768
+
+INDEX_NAME = "index"
 DOC_PREFIX = "doc:"
-
-
-def run(model, input):
-    response = requests.post(f"{API_BASE_URL}{model}", headers=headers, json=input)
-    return response.json()
-
-
-def generate_embeds(inputs):
-    model = "@cf/baai/bge-base-en-v1.5"
-    output = run(model, inputs)
-    return output
-
-
-def chat(prompt: str):
-    model = "@cf/meta/llama-2-7b-chat-int8"
-    inputs = {
-        "messages": [
-            {"role": "system", "content": "You are a friendly assistant that specializes in finance"},
-            {"role": "user", "content": prompt}
-        ]
-    }
-    output = run(model, inputs)
-    return output
 
 
 def connect_redis():
@@ -64,182 +35,76 @@ def connect_redis():
     return client
 
 
-def initialize_database(client):
-    # Fetching sample data
-    url = "https://gist.githubusercontent.com/jamesliangg/7f6155ebea0fbd30932676c944019d21/raw/69a16f71e39f5e00b7b1f179e20c79969457bbea/sample_data.json"
-    response = requests.get(url)
-    information = response.json()
-    # print(json.dumps(information[0], indent=2))
-
-    # Storing data in database
-    pipeline = client.pipeline()
-    j = 1
-    for info in information:
-        # Split descriptions to be within Cloudflare token limit (512)
-        descriptions = split_string_with_limit(info['description'], 300, tiktoken.get_encoding("cl100k_base"))
-        for description in descriptions:
-            redis_key = f"information:{j:03}"
-            json_info = {
-                "source_url": info['source_url'],
-                "description": description,
-                "date_modified": info['date_modified']
-            }
-            pipeline.json().set(redis_key, "$", json_info)
-            j += 1
-    pipeline.execute()
-    # res = client.json().get("information:002", "$.model")
-    # print(res)
-
-    # Create and store vector embeddings
-    keys = sorted(client.keys("information:*"))
-    print(keys)
-    descriptions = client.json().mget(keys, "$.description")
-    descriptions = [item for sublist in descriptions for item in sublist]
-    embeddings = generate_embeds({"text": descriptions})['result']['data']
-    VECTOR_DIMENSION = len(embeddings)
-    print(VECTOR_DIMENSION)
-    pipeline = client.pipeline()
-    for key, embedding in zip(keys, embeddings):
-        pipeline.json().set(key, "$.description_embeddings", embedding)
-    pipeline.execute()
-    # res = client.json().get("information:002")
-    # print(res)
-
-    # Create schema
-    # schema = (
-    #     TextField("$.source_url", as_name="source_url"),
-    #     TextField("$.description", as_name="description"),
-    #     TextField("$.date_modified", as_name="date_modified"),
-    #     VectorField(
-    #         "$.description_embeddings",
-    #         "FLAT",
-    #         {
-    #             "TYPE": "FLOAT32",
-    #             "DIM": VECTOR_DIMENSION,
-    #             "DISTANCE_METRIC": "COSINE",
-    #         },
-    #         as_name="vector",
-    #     ),
-    # )
-    # definition = IndexDefinition(prefix=["information:"], index_type=IndexType.JSON)
-    # res = client.ft(INFORMATION_INDEX).create_index(
-    #     fields=schema, definition=definition
-    # )
-    # # Verify success
-    # info = client.ft(INFORMATION_INDEX).info()
-    # num_docs = info["num_docs"]
-    # indexing_failures = info["hash_indexing_failures"]
-    # print(f"{num_docs} documents indexed with {indexing_failures} failures")
-
-
-def query_embeds(client):
-    queries = [
-        "Taxable amount of dividends for Canadian companies"
-    ]
-    embeddings = np.array(generate_embeds({"text": queries})['result']['data'][0], dtype=np.float32)
-    # print(encoded_queries)
-    VECTOR_DIMENSIONS = 768
-    query = (
-        Query('(*)=>[KNN 3 @vector $query_vector AS vector_score]')
-        .sort_by('vector_score')
-        .return_fields('vector_score', 'id', 'source_url', 'date_modified', 'description')
-        .dialect(2)
-    )
-    # create_query_table(client, query, queries, encoded_queries)
-    # result_docs = client.ft(INFORMATION_INDEX).search(query, {'query_vector': np.array(encoded_queries[0], dtype=np.float32).tobytes()}).docs
-    # print(result_docs)
-    query = (
-        Query("*=>[KNN 2 @vector $vec as score]")
-        .sort_by("score")
-        .return_fields("id", "score")
-        .paging(0, 2)
-        .dialect(2)
-    )
-
-    query_params = {
-        "vec": embeddings.tobytes()
-    }
-    print(client.ft(INFORMATION_INDEX).search(query, query_params).docs)
-
-
-def create_query_table(client, query, queries, encoded_queries, extra_params={}):
-    results_list = []
-    for i, encoded_query in enumerate(encoded_queries):
-        result_docs = (
-            client.ft(INFORMATION_INDEX)
-            .search(
-                query,
-                {
-                    "query_vector": np.array(
-                        encoded_query, dtype=np.float32
-                    ).tobytes()
-                }
-                | extra_params,
-            )
-            .docs
-        )
-        for doc in result_docs:
-            vector_score = round(1 - float(doc.vector_score), 2)
-            results_list.append(
-                {
-                    "query": queries[i],
-                    "score": vector_score,
-                    "id": doc.id,
-                    "source_url": doc.source_url,
-                    "date_modified": doc.date_modified,
-                    "description": doc.description,
-                }
-            )
-    print(results_list)
-
-    # Optional: convert the table to Markdown using Pandas
-    # queries_table = pd.DataFrame(results_list)
-    # queries_table.sort_values(
-    #     by=["query", "score"], ascending=[True, False], inplace=True
-    # )
-    # queries_table["query"] = queries_table.groupby("query")["query"].transform(
-    #     lambda x: [x.iloc[0]] + [""] * (len(x) - 1)
-    # )
-    # queries_table["description"] = queries_table["description"].apply(
-    #     lambda x: (x[:497] + "...") if len(x) > 500 else x
-    # )
-    # queries_table.to_markdown(index=False)
-
-
-
-def create_index(client, vector_dimensions: int):
+def create_index(client: object, vector_dimensions: int):
+    # client.ft(INDEX_NAME).dropindex(delete_documents=True)
     try:
-        # check to see if index exists
-        client.ft(INFORMATION_INDEX).info()
+        client.ft(INDEX_NAME).info()
         print("Index already exists!")
     except:
-        # schema
         schema = (
-            TextField("$.source_url", as_name="source_url"),
-            TextField("$.description", as_name="description"),
-            TextField("$.date_modified", as_name="date_modified"),
-            VectorField(
-                "$.description_embeddings",
-                "FLAT",
-                {
-                    "TYPE": "FLOAT32",
-                    "DIM": vector_dimensions,
-                    "DISTANCE_METRIC": "COSINE",
-                },
-                as_name="vector",
-            ),
+            TagField("tag"),
+            TextField("$.url", as_name="url"),
+            VectorField("vector",
+                        "FLAT", {
+                            "TYPE": "FLOAT32",
+                            "DIM": vector_dimensions,
+                            "DISTANCE_METRIC": "COSINE",
+                        }),
         )
         # index Definition
         definition = IndexDefinition(prefix=[DOC_PREFIX], index_type=IndexType.HASH)
         # create Index
-        client.ft(INFORMATION_INDEX).create_index(fields=schema, definition=definition)
+        client.ft(INDEX_NAME).create_index(fields=schema, definition=definition)
 
 
-example_input = {"text": "Tell me a joke about Cloudflare"}
-example_prompt = "Tell me a joke about Cloudflare"
-# print(generate_embeds(example_input)['result']['data'])
-# print(chat(example_prompt))
+def run(model: str, input: dict):
+    response = requests.post(f"{API_BASE_URL}{model}", headers=headers, json=input)
+    return response.json()
+
+
+def generate_embeddings(inputs: dict):
+    model = "@cf/baai/bge-base-en-v1.5"
+    output = run(model, inputs)
+    return output
+
+
+def write_embeddings(client: object, input: str, url: str):
+    # Split descriptions to be within Cloudflare token limit (512)
+    split_input = split_string_with_limit(input, 50, tiktoken.get_encoding("cl100k_base"))
+    print(split_input)
+    response = generate_embeddings({"text": split_input})['result']['data']
+    embeddings = np.array(response, dtype=np.float32)
+
+    # Write to Redis
+    for i, embedding in enumerate(embeddings):
+        client.hset(f"doc:{str((hashlib.sha256(split_input[i].encode('UTF-8'))).hexdigest())}", mapping={
+            "vector": embedding.tobytes(),
+            "content": split_input[i],
+            "tag": "cloudflare",
+            "url": url
+        })
+
+
+def query(client: object, user_query: str):
+    response = generate_embeddings({"text": user_query})['result']['data']
+    query_embedding = np.array(response, dtype=np.float32)
+
+    query = (
+        Query("(@tag:{ cloudflare })=>[KNN 2 @vector $vec as score]")
+        .sort_by("score")
+        .return_fields("content", "tag", "score")
+        .paging(0, 2)
+        .dialect(2)
+    )
+
+    query_params = {"vec": query_embedding.tobytes()}
+    print(client.ft(INDEX_NAME).search(query, query_params).docs)
+
+
+user_query = "Embeddings help you find objects similar to your query"
+sample_data = "Embeddings are representations of values or objects like text, images, and audio that are designed to be consumed by machine learning models and semantic search algorithms. They translate objects like these into a mathematical form according to the factors or traits each one may or may not have, and the categories they belong to. Essentially, embeddings enable machine learning models to find similar objects."
+sample_url = "https://www.cloudflare.com/learning/ai/what-are-embeddings/"
 client = connect_redis()
-# initialize_database(client)
-query_embeds(client)
-# create_index(client, 768)
+create_index(client, VECTOR_DIMENSIONS)
+write_embeddings(client, sample_data, sample_url)
+query(client, user_query)
