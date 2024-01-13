@@ -42,6 +42,11 @@ code {
   color: rgb(246, 218, 116);
 }
 
+.level2-title {
+  font-family: "Game Pause", sans-serif;
+  color: #fb9788;
+}
+
 .bordered-text {
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000;
