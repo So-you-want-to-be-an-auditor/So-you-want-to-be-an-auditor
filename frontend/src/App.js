@@ -22,7 +22,7 @@ import GameOver from "./components/GameOver/GameOver";
 function App() {
         const firstMessage ="Hello, I'm a Tax Advisor, how can I help you today?";
 
-        const [messages, setMessages] = useState([firstMessage]);
+        const [messages, setMessages] = useState([]);
         const [inputText, setInputText] = useState('');
         const [loading, setLoading] = useState(false); // Track loading state
         const [show, setShow] = useState(false);
