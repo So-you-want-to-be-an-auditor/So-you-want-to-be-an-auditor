@@ -2,9 +2,15 @@ import { Typography, Modal, Button, Box } from "@mui/material"
 import { useState } from "react"
 import './BeginPage.css'
 import TaxForm from './taxForm.svg'
+<<<<<<< Updated upstream:frontend/src/BeginPage.js
 
 //'So', 'you', 'want', 'to', 'be '
 //So you want to be
+=======
+import transition from "../Typing/transition"
+import {  useNavigate} from "react-router-dom"
+import mouse from "../../sound/mouse.mp3";
+>>>>>>> Stashed changes:frontend/src/components/Welcome/BeginPage.js
 
 export default function BeginPage(){
 

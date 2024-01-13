@@ -1,19 +1,19 @@
 @font-face {
     font-family: 'bigGameCustom';
-    src: url('fonts/GamepauseddemoRegular-RpmY6.otf') format('opentype');
+    src: url('../Welcome/fonts/GamepauseddemoRegular-RpmY6.otf') format('opentype');
+    
 }
 
 @font-face {
     font-family: 'smallTypewriter';
-    src: url('fonts/JMH Typewriter-Black.otf') format('opentype');
-
+    src: url('../Welcome/fonts/JMH Typewriter-Black.otf') format('opentype');
 }
 
 .PageBackground {
     height: 100vh;
     width: 100vw;
     min-width: 360px;
-    background-image: url("bgImgWelc.png");
+    background-image: url("../Welcome/bgImgWelc.png");
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -31,41 +31,36 @@
       }
 }
 
-.tax-effect{
-    animation: tax-rotation 2s ease infinite;
+.sadlifedude{
+    animation: slideIn 3s forwards;
 }
-@keyframes tax-rotation{
-    0% {
-        transform: rotate(-15deg);
+
+@keyframes slideIn {
+    from{
+        transform: translateX(-900px);
     }
-    50%{
-        transform: rotate(15deg);
-    }
-    100%{
-        transform: rotate(-15deg);
+    to{
+        transform:translateX(0);
     }
 }
 
-.text-rotate{
+.container{
+    display: inline-block;
+}
+
+.text-rotate-game{
     animation-name: spin;
     animation-duration: 1s;
     animation-timing-function: ease;
     animation-iteration-count: 1;
-}
-
-.text-rotate-two{
-    animation-name: spin;
-    animation-duration: 1s;
-    animation-timing-function: ease;
-    animation-iteration-count: 1;
-    animation-delay: 500ms;
 }
 
 @keyframes spin {
     from {
-        transform:rotate(0deg);
+        transform:rotate(0deg) scale(2,2);
     }
     to {
-        transform:rotate(360deg);
+        transform:rotate(360deg) scale(1,1);
     }
 }
+
