@@ -1,0 +1,66 @@
+@font-face {
+    font-family: 'bigGameCustom';
+    src: url('../Welcome/fonts/GamepauseddemoRegular-RpmY6.otf') format('opentype');
+    
+}
+
+@font-face {
+    font-family: 'smallTypewriter';
+    src: url('../Welcome/fonts/JMH Typewriter-Black.otf') format('opentype');
+}
+
+.PageBackground {
+    height: 100vh;
+    width: 100vw;
+    min-width: 360px;
+    background-image: url("../Welcome/bgImgWelc.png");
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    perspective-origin: 50% 50%;
+    animation: flow-effect 100s ease infinite;
+}
+
+@keyframes flow-effect {
+    
+    100% {
+        background-position: 0px -400%;
+        
+      }
+}
+
+.sadlifedude{
+    animation: slideIn 3s forwards;
+}
+
+@keyframes slideIn {
+    from{
+        transform: translateX(-900px);
+    }
+    to{
+        transform:translateX(0);
+    }
+}
+
+.container{
+    display: inline-block;
+}
+
+.text-rotate-game{
+    animation-name: spin;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-iteration-count: 1;
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg) scale(2,2);
+    }
+    to {
+        transform:rotate(360deg) scale(1,1);
+    }
+}
+

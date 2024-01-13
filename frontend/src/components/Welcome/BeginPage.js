@@ -105,14 +105,13 @@ import mouse from "../../sound/mouse.mp3";
             <Modal open={isOpen} sx={{display: 'flex', 
             alignItems:'center', 
             justifyContent:'center'}}>
-                <Box sx={{backgroundColor:'white', height: '80%', width:'75%', 
+                <Box sx={{backgroundColor:'white', height: '90%', width:'75%', 
                 border:'4px solid black',
                 display: 'flex', justifyContent:'center',
-                flexDirection:'column', 
-                alignItems:'center'}}>
+                flexDirection:'column'}}>
                     <Typography sx={{fontFamily:'smallTypewriter', 
                     fontSize:'150%', 
-                    marginTop:'1%'}}>
+                    marginTop:'1%', marginX: '2%'}}>
                         Instructions:
                     </Typography>
                     <Typography sx={{fontFamily:'smallTypewriter', 
