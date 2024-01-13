@@ -1,8 +1,7 @@
-
-import './App.css';
-import TypingEffect from './components/Typing/TypingEffect';
-import { AnimatePresence } from 'framer-motion';
-// import { Routes, Route, useLocation } from 'react-router-dom'; 
+import "./App.css";
+import TypingEffect from "./components/Typing/TypingEffect";
+import { AnimatePresence } from "framer-motion";
+// import { Routes, Route, useLocation } from 'react-router-dom';
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -49,14 +48,9 @@ function App() {
           <Route path="/story" element= { <Story />} />
           <Route path="/level1" element= { <Identification />} />
         </Routes>
-
       </AnimatePresence>
     </div>
   );
 }
 
 export default App;
-
-
-
-

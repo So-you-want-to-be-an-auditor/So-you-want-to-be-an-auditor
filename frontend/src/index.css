@@ -31,9 +31,25 @@ code {
   font-style: normal;
 }
 
+@font-face {
+  font-family: "smallTypewriter";
+  src: url("./components/Welcome/fonts/JMH Typewriter-Black.otf")
+    format("opentype");
+}
+
 .level-title {
   font-family: "Game Pause", sans-serif;
-  color: RGB(254 200 196);
+  color: rgb(246, 218, 116);
+}
+
+.bordered-text {
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.form-font {
+  font-family: "smallTypewriter", sans-serif;
+  color: black;
 }
 
 .custom-shadow {
