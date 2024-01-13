@@ -2,7 +2,7 @@ import React from 'react'
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useState } from "react";
 import CursorBlinker from "./CursorBlinker";
-
+import transition from './transition';
 function TypingEffect() {
     const baseText = "heello shehack....., ";
     const count = useMotionValue(0);
@@ -28,7 +28,7 @@ function TypingEffect() {
     );
 }
 
-export default TypingEffect
+export default transition(TypingEffect);
 
 
 
