@@ -20,6 +20,8 @@ import { useState, useEffect } from "react";
 import Identification from "./pages/identification/Identification";
 import ChatBox from "./components/Chatbox/Chatbox";
 import GameOver from "./components/GameOver/GameOver";
+import GameWon from "./components/GameWon/GameWon";
+import Donations from "./components/Donations/Donations";
 function App() {
   const firstMessage = "Hello, I'm a Tax Advisor, how can I help you today?";
 

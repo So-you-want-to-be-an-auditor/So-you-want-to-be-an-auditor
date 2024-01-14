@@ -4,6 +4,7 @@ import TypingEffect from '../Typing/TypingEffect'
 import board from "./board.jpg"
 import Button from '../Typing/Button'
 import transition from '../Typing/transition'
+
 function Story() {
   return (
     <div className="Story">
