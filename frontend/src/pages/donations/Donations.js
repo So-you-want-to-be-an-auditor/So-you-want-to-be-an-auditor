@@ -5,6 +5,8 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
+import { useNavigate } from "react-router-dom";
+
 import "../../index.css";
 import "../../components/Welcome/BeginPage.css";
 
@@ -51,6 +53,8 @@ const Donations = () => {
   });
   const [currentLives, setCurrentLives] = useState(2);
 
+  const navigate = useNavigate();
+
   const validateInput = (name, value) => {
     let error = false;
     let helperText = "";
@@ -88,8 +92,14 @@ const Donations = () => {
     });
     setFields(newFields);
 
-    if (!allCorrect) {
+    if (allCorrect && currentLives > 0) {
+      navigate("/");
+    } else if (!allCorrect) {
       setCurrentLives((prevLives) => prevLives - 1);
+    }
+
+    if (currentLives < 0) {
+      navigate("/gameover");
     }
   };
 
@@ -157,9 +167,10 @@ const Donations = () => {
         <div>
           {" "}
           <div>
-            {[...Array(currentLives)].map((_, index) => (
-              <HeartIcon key={index} />
-            ))}
+            {currentLives > 0 &&
+              [...Array(currentLives)].map((_, index) => (
+                <HeartIcon key={index} />
+              ))}
           </div>
         </div>
 
