@@ -19,6 +19,7 @@ import {useState, useEffect} from "react";
 import Identification from './pages/identification/Identification'
 import ChatBox from "./components/Chatbox/Chatbox";
 import GameOver from "./components/GameOver/GameOver";
+import GameWon from "./components/GameWon/GameWon";
 function App() {
         const firstMessage ="Hello, I'm a Tax Advisor, how can I help you today?";
 
@@ -59,7 +60,7 @@ function App() {
     <div className="App">
       <div className="main-audio" onClick={()=>setPlay((play)=>!play)}>{play ? <FaVolumeUp /> : <FaVolumeMute />} </div>
       {
-            show ? <div className="chatbox">
+            show ? <div className="chatbox" >
               <ChatBox 
                 messages={messages} 
                 setMessages={setMessages}
@@ -83,6 +84,7 @@ function App() {
           <Route path="/story" element= { <Story />} />
           <Route path="/level1" element= { <Identification />} />
           <Route path="/gameover" element ={<GameOver />} />
+          <Route path="/gamewon" element = {<GameWon />} />
         </Routes>
       </AnimatePresence>
     </div>
