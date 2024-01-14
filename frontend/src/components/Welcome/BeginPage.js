@@ -65,7 +65,7 @@ import mouse from "../../sound/mouse.mp3";
 
             <Button
             onClick ={()=>{
-                navigate("/gamewon"); 
+                navigate("/story"); 
                 audio.play();}}
             variant='contained' sx={{margin: '10px', 
             boxShadow: '4px 4px 4px grey',
