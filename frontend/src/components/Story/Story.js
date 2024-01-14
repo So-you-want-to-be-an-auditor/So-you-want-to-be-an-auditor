@@ -1,7 +1,6 @@
 import React from 'react'
 import "./Story.css"
 import TypingEffect from '../Typing/TypingEffect'
-import board from "./board.jpg"
 import Button from '../Typing/Button'
 import transition from '../Typing/transition'
 

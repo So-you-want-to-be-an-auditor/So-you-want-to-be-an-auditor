@@ -1,18 +1,11 @@
 import "./App.css";
-import TypingEffect from "./components/Typing/TypingEffect";
 import { AnimatePresence } from "framer-motion";
-// import { Routes, Route, useLocation } from 'react-router-dom';
 import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  RouterProvider,
   Route,
   Routes,
   useLocation,
 } from "react-router-dom"; // Corrected import statement
-import Button from "./components/Typing/Button";
 import Story from "./components/Story/Story";
-import Dragging from "./components/Typing/Dragging";
 import BeginPage from "./components/Welcome/BeginPage";
 import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import Sweet from "./sound/Sweet.mp3";
@@ -23,8 +16,6 @@ import GameOver from "./components/GameOver/GameOver";
 import GameWon from "./components/GameWon/GameWon";
 import Donations from "./pages/donations/Donations";
 function App() {
-  const firstMessage = "Hello, I'm a Tax Advisor, how can I help you today?";
-
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState("");
   const [loading, setLoading] = useState(false); // Track loading state

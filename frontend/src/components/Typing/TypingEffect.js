@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import CursorBlinker from "./CursorBlinker";
 import transition from './transition';
 function TypingEffect() {

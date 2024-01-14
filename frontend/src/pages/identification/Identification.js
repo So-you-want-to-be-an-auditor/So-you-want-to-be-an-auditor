@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { Box, Modal, Typography } from '@mui/material'
 import Button from "@mui/material/Button";
-import Popper from "@mui/material/Popper";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import { useNavigate } from "react-router-dom";
@@ -64,18 +63,12 @@ const Identification = () => {
   const [showCorrectAnswers, setShowCorrectAnswers] = useState({});
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const [openPopper, setOpenPopper] = useState(false);
-  const [popperContent, setPopperContent] = useState("");
+  const [setOpenPopper] = useState(false);
+  const [setPopperContent] = useState("");
 
   const [currentLives, setCurrentLives] = useState(2);
 
   const navigate = useNavigate();
-
-  const handleClick = (event, correctAnswer) => {
-    setAnchorEl(anchorEl ? null : event.currentTarget);
-    setPopperContent(correctAnswer);
-    setOpenPopper((prev) => !prev);
-  };
 
   const onDragEnd = (result) => {
     if (!result.destination) {

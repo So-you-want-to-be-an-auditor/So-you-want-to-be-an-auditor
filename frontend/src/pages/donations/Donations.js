@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { Box, Modal, Typography } from '@mui/material'
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -56,21 +55,6 @@ const Donations = () => {
   const [currentLives, setCurrentLives] = useState(2);
 
   const navigate = useNavigate();
-
-  const validateInput = (name, value) => {
-    let error = false;
-    let helperText = "";
-
-    if (value !== correctAnswers[name]) {
-      error = true;
-      helperText = "Incorrect answer";
-    }
-
-    setFields((prevFields) => ({
-      ...prevFields,
-      [name]: { ...prevFields[name], error, helperText },
-    }));
-  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;

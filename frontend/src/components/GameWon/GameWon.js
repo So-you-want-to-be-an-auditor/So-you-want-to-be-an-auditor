@@ -1,9 +1,6 @@
 import './GameWon.css'
 import Lottie from 'react-lottie'
-import { Typography, Button } from '@mui/material'
-import { useEffect, useState } from 'react'
-import {  useNavigate } from "react-router-dom"
-import mouse from "../../sound/mouse.mp3"
+import { Typography } from '@mui/material'
 import animationData from './confetti.json'
 import taxDude from './bank-svgrepo-com.svg'
 

@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import './Chatbox.scss';
 import axios from 'axios';
 import { AiOutlineSend } from "react-icons/ai";
