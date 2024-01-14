@@ -18,7 +18,7 @@ function TypingEffect() {
         ease: "easeInOut",
       });
       return controls.stop;
-    }, []);
+    });
   
     return (
       <span className="story-content">

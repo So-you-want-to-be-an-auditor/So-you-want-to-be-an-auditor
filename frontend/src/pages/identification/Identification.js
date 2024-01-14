@@ -62,10 +62,6 @@ const Identification = () => {
 
   const [showCorrectAnswers, setShowCorrectAnswers] = useState({});
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [setOpenPopper] = useState(false);
-  const [setPopperContent] = useState("");
-
   const [currentLives, setCurrentLives] = useState(2);
 
   const navigate = useNavigate();
