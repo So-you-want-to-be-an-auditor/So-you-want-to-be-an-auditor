@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-
+import { Box, Modal, Typography } from '@mui/material'
 import Button from "@mui/material/Button";
 import Popper from "@mui/material/Popper";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -138,6 +138,18 @@ const Identification = () => {
   };
 
   const audio = new Audio(mouse);
+
+  const[isOpen, setIsOpen] = useState(true)
+
+  const openModal = () => {
+    setIsOpen(true);
+    audio.play();
+  }
+
+  const closeModal = () => {
+    setIsOpen(false);
+    audio.play()
+  }
 
   return (
     <div className="PageBackground overflow-y-auto">
@@ -554,15 +566,100 @@ const Identification = () => {
 
         <div className="px-8">
           {" "}
+          
           <Button
             onClick={handleSubmit}
-            style={{ backgroundColor: "#f6da74", color: "black" }}
+            style={{ backgroundColor: "#f6da74", color: "black", border:'2px solid black'}}
             size="large"
           >
             <p className="form-font text-sm"> Submit</p>
           </Button>
+          <Button
+            onClick={openModal}
+            style={{ backgroundColor: "#f6da74", color: "black", border:'2px solid black'}}
+            size="large"
+          >
+            <p className="form-font text-sm"> Tutorial</p>
+          </Button>
+          
         </div>
       </div>
+      <Modal open={isOpen} sx={{display: 'flex', 
+            alignItems:'center', 
+            justifyContent:'center'}}>
+      <Box sx={{backgroundColor:'white', height: '90%', width:'75%', 
+                border:'4px solid black',
+                display: 'flex', justifyContent:'center',
+                flexDirection:'column'}}>
+                    <Typography sx={{fontFamily:'smallTypewriter', 
+                    fontSize:'120%', 
+                    marginTop:'1%', marginX: '2%'}}>
+                        The point of this activity is to show you the importance of being able to 
+                        correctly identify personal information in order to accurately fill out your tax forms. This would be one of the very first things you would need to do when filling out
+                        a tax form.
+                    </Typography>
+                    <Typography sx={{fontFamily:'smallTypewriter', 
+                    fontSize:'100%', 
+                    marginTop:'1%',
+                    marginX:'2%'}}>
+                        1. Drag and drop the items from the identification pieces on the right side into the 'Step 1 - Identification and Other Form'.
+                    </Typography>
+                    <Typography sx={{fontFamily:'smallTypewriter', 
+                    fontSize:'100%', 
+                    marginTop:'2%',
+                    marginX:'2%'}}>
+                        2. Once you are done, press submit to see if your answers were correct or not. Below are the fields you need to drang and drop to and what they are commonly called.
+                    </Typography>
+                    <Typography sx={{fontFamily:'smallTypewriter', 
+                    fontSize:'100%', 
+                    marginTop:'1%',
+                    marginX:'2%'}}>
+                        First Name - This is a person's given name, often referred to as first, given, or legal name.
+                    </Typography>
+                    <Typography sx={{fontFamily:'smallTypewriter', 
+                    fontSize:'100%', 
+                    marginTop:'1%',
+                    marginX:'2%'}}>
+                         Last Name - This is a person's family name, Often referred to as surname or last name.
+                    </Typography>
+                    <Typography sx={{fontFamily:'smallTypewriter', 
+                    fontSize:'100%', 
+                    marginTop:'1%',
+                    marginX:'2%'}}>
+                        Mailing (Resedential) Address - In tax forms, you need to fill out the Street/Apartment number, Street Name, and Building Name (if applicable).
+                    </Typography>
+                    <Typography sx={{fontFamily:'smallTypewriter', 
+                    fontSize:'100%', 
+                    marginTop:'1%',
+                    marginX:'2%'}}>
+                        City - the city associated with the address.    Province/Territory - The province or territory associated with the address. Typically you can write down the 2 letter abbreviation or the full province name unless otherwise indicated.
+                    </Typography>
+                    <Typography sx={{fontFamily:'smallTypewriter', 
+                    fontSize:'100%', 
+                    marginTop:'1%',
+                    marginX:'2%'}}>
+                        Social Insurance Number (SIN) - This is a very important value and must be entered precisely since this is the number used to track individuals' income and contributions to the Canadian social benefits system. 
+                    </Typography>
+                    <Typography sx={{fontFamily:'smallTypewriter', 
+                    fontSize:'100%', 
+                    marginTop:'1%',
+                    marginX:'2%'}}>
+                        Date of Birth (DOB) - The year (yyyy or yy), month (mm), and day (dd) a person was born on. Typical formats of this include (yyyy/mm/dd), (yy/mm/dd), (dd/mm/yyyy), etc.
+                    </Typography>
+                    <Button onClick={closeModal} variant='contained' sx={{margin: '10px', 
+                    boxShadow: '4px 4px 4px grey',
+                    backgroundColor:'#f6da74',
+                    border: '2px solid black',
+                    color:'black',
+                    '&:hover': {background: '#600000', color:'white'},
+                    width:'40%',
+                    fontFamily:'smallTypewriter',
+                    height:'7%', fontSize:'120%'}}>
+                        Close
+                    </Button>
+
+        </Box>
+      </Modal>
     </div>
   );
 };

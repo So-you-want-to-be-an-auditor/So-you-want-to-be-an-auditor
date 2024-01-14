@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-
+import { Box, Modal, Typography } from '@mui/material'
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -116,6 +116,18 @@ const Donations = () => {
 
   const audio = new Audio(mouse);
 
+  const[isOpen, setIsOpen] = useState(true)
+
+  const openModal = () => {
+    setIsOpen(true);
+    audio.play();
+  }
+
+  const closeModal = () => {
+    setIsOpen(false);
+    audio.play()
+  }
+
   return (
     <div className="PageBackground overflow-y-auto overflow-x-auto">
       <p className="level2-title bordered-text text-7xl py-4 pb-4">
@@ -187,13 +199,86 @@ const Donations = () => {
           {" "}
           <Button
             onClick={handleSubmit}
-            style={{ backgroundColor: "#FB9788", color: "black" }}
+            style={{ backgroundColor: "#FB9788", color: "black", border:'2px solid black' }}
             size="large"
           >
             <p className="form-font text-sm"> Submit</p>
           </Button>
+          <Button
+            onClick={openModal}
+            style={{ backgroundColor: "#FB9788", color: "black", border:'2px solid black'}}
+            size="large"
+          >
+            <p className="form-font text-sm"> Tutorial</p>
+          </Button>
         </div>
       </div>
+      <Modal open={isOpen} sx={{display: 'flex', 
+            alignItems:'center', 
+            justifyContent:'center'}}>
+      <Box sx={{backgroundColor:'white', height: '90%', width:'75%', 
+                border:'4px solid black',
+                display: 'flex', justifyContent:'center',
+                flexDirection:'column'}}>
+                    <Typography sx={{fontFamily:'smallTypewriter', 
+                    fontSize:'120%', 
+                    marginTop:'1%', marginX: '2%'}}>
+                        The point of this activity is to show you the importance of being able to 
+                        correctly fill out the charitable donations section of a tax form. This activity does require a little math (be warned!).
+                    </Typography>
+                    <Typography sx={{fontFamily:'smallTypewriter', 
+                    fontSize:'120%', 
+                    marginTop:'1%',
+                    marginX:'2%'}}>
+                        People that make charitable donations in Canada are eligible for a federal Charitable Donation Tax Credit (CDTC) which allows donors to
+                        reduce their federal income taxes. However in order to be eligible, valid receipts and the correct amount from them must be entered.
+                    </Typography>
+                    <Typography sx={{fontFamily:'smallTypewriter', 
+                    fontSize:'100%', 
+                    marginTop:'2%',
+                    marginX:'2%'}}>
+                        1. You have been given a valid receipt. Your task is to correctly identify and fill out/type in the correct amount for each section. Finally, you must add up the numbers and write the correct total amount on the last line. 
+                        If there is no organization given for a specific line, you can assume that the value for that line is 0.
+                    </Typography>
+                    <Typography sx={{fontFamily:'smallTypewriter', 
+                    fontSize:'100%', 
+                    marginTop:'1%',
+                    marginX:'2%'}}>
+                        Line 1 - Donations made to Registered Canadian Charities - A full list can be found on the Canada.ca website.
+                    </Typography>
+                    <Typography sx={{fontFamily:'smallTypewriter', 
+                    fontSize:'100%', 
+                    marginTop:'1%',
+                    marginX:'2%'}}>
+                         Line 2 - Donations made to a Canadian Government body. This includes federal, provincial, and municipal governments within Canada.
+                    </Typography>
+                    <Typography sx={{fontFamily:'smallTypewriter', 
+                    fontSize:'100%', 
+                    marginTop:'1%',
+                    marginX:'2%'}}>
+                        Line 3 - Donations made to registered universities outside Canada - DO NOT include donation amounts for universities within Canada.
+                    </Typography>
+                    <Typography sx={{fontFamily:'smallTypewriter', 
+                    fontSize:'100%', 
+                    marginTop:'1%',
+                    marginX:'2%'}}>
+                        Line 4 - Donations made to the United Nations or registered foreign charities the Government of Canada has made a donation to. - Only inlude foreign charities here, Canadian charities belong in Line 1.
+                    </Typography>
+                    
+                    <Button onClick={closeModal} variant='contained' sx={{margin: '10px', 
+                    boxShadow: '4px 4px 4px grey',
+                    backgroundColor:'#FB9788',
+                    border: '2px solid black',
+                    color:'black',
+                    '&:hover': {background: '#600000', color:'white'},
+                    width:'40%',
+                    fontFamily:'smallTypewriter',
+                    height:'7%', fontSize:'120%'}}>
+                        Close
+                    </Button>
+
+        </Box>
+      </Modal>
     </div>
   );
 };

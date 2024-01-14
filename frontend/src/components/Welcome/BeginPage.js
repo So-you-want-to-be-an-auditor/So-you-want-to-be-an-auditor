@@ -136,7 +136,7 @@ import mouse from "../../sound/mouse.mp3";
                     fontSize:'120%', 
                     marginTop:'2%',
                     marginX:'2%'}}>
-                        4. As a tax auditor however, you must make sure to drag the correct items to the correct fields. Otherwise you lose a life! If you lose all 2 lives given to you at each level the game is over :{'('}
+                        4. As a tax auditor however, you must make sure to fill out the correct fields as indicated. Otherwise you lose a life! If you lose all 2 lives given to you at each level the game is over :{'('}
                     </Typography>
                     <Typography sx={{fontFamily:'smallTypewriter', 
                     fontSize:'120%', 
