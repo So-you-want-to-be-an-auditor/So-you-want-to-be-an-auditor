@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 import Button from "@mui/material/Button";
@@ -91,6 +91,12 @@ const Identification = () => {
     setQuestions(newQuestions);
   };
 
+  useEffect(() => {
+    if (currentLives === 0) {
+      navigate("/gameover");
+    }
+  }, [currentLives])
+
   const handleSubmit = () => {
     const updatedQuestions = questions.map((question) => ({
       ...question,
@@ -109,9 +115,7 @@ const Identification = () => {
     });
     setShowCorrectAnswers(newShowCorrectAnswers);
 
-    if(currentLives == 0){
-      navigate("/gameover");
-    }
+    
     if (allCorrect && currentLives > 0) {
       navigate("/level2");
     } else if (!allCorrect && currentLives > 0) {
