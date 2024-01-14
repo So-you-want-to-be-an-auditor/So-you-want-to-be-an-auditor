@@ -5,6 +5,7 @@
 # https://redis-py.readthedocs.io/en/stable/examples/search_vector_similarity_examples.html
 import hashlib
 import os
+import time
 import dotenv
 import requests
 import redis
@@ -14,9 +15,6 @@ from redis.commands.search.query import Query
 import numpy as np
 from textSplitter import *
 import tiktoken
-import json
-import calendar
-import time
 
 dotenv.load_dotenv()
 
@@ -261,7 +259,7 @@ def chat(chat_client, data_client, user_query: str, time_stamp: str):
              "content": "Below are some of the relevant questions from previous conversations" + str(history)},
             {"role": "system", "content": "Here is the answer to the user's query: " + query_response},
             {"role": "system",
-             "content": "Write an answer to the query below using the above data and limit your reponse to 100 words"},
+             "content": "Write an answer to the query below using the above data and limit your response to 100 words"},
             {"role": "user", "content": user_query}
         ]
     }
