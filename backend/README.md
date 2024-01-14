@@ -51,4 +51,4 @@ Example JSON body
 1. Push to Docker Hub using `docker push jamesliangg/<CONTAINER_NAME>`
 ### Running Container
 1. Create a `.env` file in the directory you're running the `run`, example is in [Preparing Environment](#Preparing Environment)
-1. Run `docker run -p 8000:8000 --env-file ./.env -d jamesliangg/<CONTAINER_NAME>`
+1. Run `docker run -p 8000:8000 --env-file ./.env --platform linux/amd64 -d jamesliangg/<CONTAINER_NAME>`
