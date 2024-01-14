@@ -23,7 +23,7 @@ const ChatBox = ({messages, setMessages, inputText, setInputText, loading, setLo
       try {
         setLoading(true); // Start loading
         const response = await axios.post(
-          'http://localhost:8000/v1/query',
+          'https://shehacks-chatbot.onrender.com/v1/query',
           {
             query: inputText,
             time_stamp: "1705166849"
