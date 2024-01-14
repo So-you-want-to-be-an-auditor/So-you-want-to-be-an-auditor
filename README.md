@@ -1,6 +1,6 @@
 #So you want to be an auditor
 
-## Tech Stacks: React.js, Node.js & Cloudflare AI API
+## Tech Stacks: React.js, Flask & Cloudflare AI API
 
 ### Frontend Screens
 
