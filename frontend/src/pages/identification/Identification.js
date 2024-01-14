@@ -177,11 +177,14 @@ const Identification = () => {
                               padding: "5px 10px",
                               backgroundColor: "#fff",
                               display: "flex",
+                              height: 40,
                               alignItems: "center",
+                              // position: "fixed",
+
                             }}
                             className="text-black form-font text-sm"
                           >
-                            {question.answer || "Drag Your Choice to Here"}
+                            {question.answer || "                "}
                           </div>
                         </div>
                         {!question.isCorrect && question.answer && (
