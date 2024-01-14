@@ -536,9 +536,10 @@ const Identification = () => {
         <div>
           {" "}
           <div>
-            {[...Array(currentLives)].map((_, index) => (
-              <HeartIcon key={index} />
-            ))}
+            {currentLives > 0 &&
+              [...Array(currentLives)].map((_, index) => (
+                <HeartIcon key={index} />
+              ))}
           </div>
         </div>
 
