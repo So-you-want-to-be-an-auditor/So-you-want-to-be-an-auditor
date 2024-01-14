@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 import Button from "@mui/material/Button";
@@ -78,6 +78,12 @@ const Donations = () => {
     }));
   };
 
+  useEffect(() => {
+    if (currentLives === 0) {
+      navigate("/gameover");
+    }
+  }, [currentLives])
+
   const handleSubmit = () => {
     let allCorrect = true;
     const newFields = {};
@@ -98,9 +104,7 @@ const Donations = () => {
       setCurrentLives((prevLives) => prevLives - 1);
     }
 
-    if (currentLives == 0) {
-      navigate("/gameover");
-    }
+    
   };
 
   const HeartIcon = () => {
