@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e1b29bdb.css",
+    "main.js": "/static/js/main.136bca5d.js",
+    "static/js/787.9e9f4ffd.chunk.js": "/static/js/787.9e9f4ffd.chunk.js",
+    "static/media/Sweet.mp3": "/static/media/Sweet.a93486dec96cc8311cad.mp3",
+    "static/media/JMH Typewriter-Black.otf": "/static/media/JMH Typewriter-Black.fa498f87609960b6e832.otf",
+    "static/media/bgImgWelc.png": "/static/media/bgImgWelc.73fbe26c32b015fe8230.png",
+    "static/media/mouse.mp3": "/static/media/mouse.e24e3d3905e012cf714d.mp3",
+    "static/media/GamepauseddemoRegular-RpmY6.otf": "/static/media/GamepauseddemoRegular-RpmY6.b2299f73b03035805562.otf",
+    "static/media/bank-svgrepo-com.svg": "/static/media/bank-svgrepo-com.4ec361900507ce14aeafc92126389335.svg",
+    "static/media/taxForm.svg": "/static/media/taxForm.1420e6429c77a6e9cb329363a9d71827.svg",
+    "index.html": "/index.html",
+    "main.e1b29bdb.css.map": "/static/css/main.e1b29bdb.css.map",
+    "main.136bca5d.js.map": "/static/js/main.136bca5d.js.map",
+    "787.9e9f4ffd.chunk.js.map": "/static/js/787.9e9f4ffd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e1b29bdb.css",
+    "static/js/main.136bca5d.js"
+  ]
+}
