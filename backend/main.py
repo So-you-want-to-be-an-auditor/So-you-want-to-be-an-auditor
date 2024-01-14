@@ -1,5 +1,5 @@
 # from fastapi import FastAPI
-# from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 import fastapi
 from pydantic import BaseModel
 from cloudflareEmbed import connect_redis_information, connect_redis_chat, create_information_index, create_chat_index, chat
@@ -11,7 +11,7 @@ VECTOR_DIMENSIONS = 768
 
 # Deal with CORS
 app.add_middleware(
-    fastapi.middleware.cors.CORSMiddleware,
+    CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
