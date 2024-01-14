@@ -1,4 +1,4 @@
-#So you want to be an auditor
+# So you want to be an auditor
 
 ## Tech Stacks: React.js, Flask, Redis & Cloudflare AI API
 
