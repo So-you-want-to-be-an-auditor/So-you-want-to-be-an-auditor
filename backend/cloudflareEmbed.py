@@ -1,5 +1,6 @@
 # https://developers.cloudflare.com/workers-ai/models/text-embeddings/
 # https://developers.cloudflare.com/workers-ai/models/text-generation/
+# https://developers.cloudflare.com/workers-ai/models/translation/
 # https://redis.io/docs/get-started/vector-database/
 # https://medium.com/@dan_43009/how-to-give-your-chatbot-more-memory-f5d64dbd2a3c
 # https://redis-py.readthedocs.io/en/stable/examples/search_vector_similarity_examples.html
@@ -15,6 +16,7 @@ from redis.commands.search.query import Query
 import numpy as np
 from textSplitter import *
 import tiktoken
+from langdetect import detect
 
 dotenv.load_dotenv()
 
@@ -255,6 +257,20 @@ def chat(chat_client, data_client, user_query: str, time_stamp: str):
     # model = "@cf/meta/llama-2-7b-chat-fp16"
     # smaller faster model
     model = "@hf/thebloke/codellama-7b-instruct-awq"
+    language = detect(user_query)
+    if language != 'en':
+        lang_dict = {"en": "english", "fr": "french"}
+        language = lang_dict[language]
+        translation_model = "@cf/meta/m2m100-1.2b"
+        translation_input = {
+            "text": user_query,
+            "source_lang": language,
+            "target_lang": "english"
+        }
+        response = run(translation_model, translation_input)
+        while not response['success']:
+            response = run(translation_model, translation_input)
+        user_query = response['result']['translated_text']
     history = query_history(chat_client, user_query, time_stamp)
     query_response = query_information(data_client, user_query)
     input = {
@@ -269,6 +285,28 @@ def chat(chat_client, data_client, user_query: str, time_stamp: str):
         ]
     }
     response = run(model, input)
+    while not response['success']:
+        response = run(model, input)
+        empty_return = True
+        while empty_return:
+            try:
+                if len(response['result']['response']) <= 1:
+                    response = run(model, input)
+                else:
+                    empty_return = False
+            finally:
+                print("Failed")
+    if language != 'en':
+        translation_model = "@cf/meta/m2m100-1.2b"
+        translation_input = {
+            "text": response['result']['response'],
+            "source_lang": "english",
+            "target_lang": language
+        }
+        response = run(translation_model, translation_input)
+        while not response['success']:
+            response = run(translation_model, translation_input)
+        response['result']['response'] = response['result']['translated_text']
     return response
 
 
