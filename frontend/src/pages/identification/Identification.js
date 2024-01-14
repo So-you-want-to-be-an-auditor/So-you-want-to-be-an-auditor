@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 
 import "../../index.css";
 import "../../components/Welcome/BeginPage.css";
+import transition from "../../components/Typing/transition";
+import mouse from "../../sound/mouse.mp3"
 
 const correctAnswers = {
   firstname: "Mona",
@@ -98,6 +100,7 @@ const Identification = () => {
   }, [currentLives])
 
   const handleSubmit = () => {
+    audio.play();
     const updatedQuestions = questions.map((question) => ({
       ...question,
       isCorrect: question.answer === correctAnswers[question.id],
@@ -133,6 +136,8 @@ const Identification = () => {
   const HeartIcon = () => {
     return <FavoriteIcon fontSize="large" color="error" />;
   };
+
+  const audio = new Audio(mouse);
 
   return (
     <div className="PageBackground overflow-y-auto">
@@ -562,4 +567,4 @@ const Identification = () => {
   );
 };
 
-export default Identification;
+export default transition(Identification);
