@@ -19,6 +19,7 @@ import {useState, useEffect} from "react";
 import Identification from './pages/identification/Identification'
 import ChatBox from "./components/Chatbox/Chatbox";
 import GameOver from "./components/GameOver/GameOver";
+import mouse from "./sound/mouse.mp3";
 function App() {
         const firstMessage ="Hello, I'm a Tax Advisor, how can I help you today?";
 
@@ -69,7 +70,10 @@ function App() {
                 setInputText={setInputText} 
                 setShow={setShow}/></div>:(
               <div className="ai-img-container" onClick={handleChat}>
-                <img className="ai-img" src="https://play-lh.googleusercontent.com/Oe0NgYQ63TGGEr7ViA2fGA-yAB7w2zhMofDBR3opTGVvsCFibD8pecWUjHBF_VnVKNdJ=w240-h480-rw" alt="AI-chatbox" />
+                <img onClick ={()=>{
+                  const a = new Audio(mouse);
+                  a.play();
+                }} className="ai-img" src="https://play-lh.googleusercontent.com/Oe0NgYQ63TGGEr7ViA2fGA-yAB7w2zhMofDBR3opTGVvsCFibD8pecWUjHBF_VnVKNdJ=w240-h480-rw" alt="AI-chatbox" />
 
               </div>
 

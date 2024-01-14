@@ -4,14 +4,15 @@ import axios from 'axios';
 import { AiOutlineSend } from "react-icons/ai";
 import { BsArrowDownRight, BsXLg } from "react-icons/bs";
 
-
+import mouse from "../../sound/mouse.mp3"
 const ChatBox = ({messages, setMessages, inputText, setInputText, loading, setLoading, setShow}) => {
   const handleInputChange = event => {
     setInputText(event.target.value);
   };
-  
+  const audio = new Audio(mouse);
 
   const handleSubmit = async event => {
+    audio.play();
     event.preventDefault();
     if (inputText.trim() !== '') {
       setMessages(prevMessages => [
@@ -51,13 +52,15 @@ const ChatBox = ({messages, setMessages, inputText, setInputText, loading, setLo
         <div onClick={(e)=>{
           e.preventDefault();
           setShow(false);
+          audio.play();
 
         }}><BsArrowDownRight className="icon"/></div>
         <div
           onClick={(e)=>{
             e.preventDefault();
             setShow(false);
-            setMessages([])
+            setMessages([]);
+            audio.play();
           }}
         ><BsXLg className="icon"/></div> 
       </div>
@@ -86,7 +89,7 @@ const ChatBox = ({messages, setMessages, inputText, setInputText, loading, setLo
           placeholder="Type your question..."
           className="input-field"
         />
-        <button type="submit" className="send-button">
+        <button onClick={()=>audio.play()} type="submit" className="send-button">
           <AiOutlineSend />
         </button>
       </form>
