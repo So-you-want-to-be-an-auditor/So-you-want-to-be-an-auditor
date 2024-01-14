@@ -21,6 +21,7 @@ import Identification from "./pages/identification/Identification";
 import ChatBox from "./components/Chatbox/Chatbox";
 import GameOver from "./components/GameOver/GameOver";
 import Donations from "./pages/donations/Donations";
+import GameWon from "./components/GameWon/GameWon";
 
 function App() {
   const firstMessage = "Hello, I'm a Tax Advisor, how can I help you today?";
@@ -91,6 +92,7 @@ function App() {
           <Route path="/level1" element={<Identification />} />
           <Route path="/gameover" element={<GameOver />} />
           <Route path="/level2" element={<Donations />} />
+          <Route path="/gamewon" element={<GameWon />} />
         </Routes>
       </AnimatePresence>
     </div>
