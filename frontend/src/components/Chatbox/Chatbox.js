@@ -31,7 +31,7 @@ const ChatBox = ({messages, setMessages, inputText, setInputText, loading, setLo
         );
         console.log("response:", response);
 
-        const aiResponse = response.data.answer;
+        const aiResponse = response.data.result.response;
         setMessages(prevMessages => [
           ...prevMessages,
           { text: aiResponse, isUser: false },

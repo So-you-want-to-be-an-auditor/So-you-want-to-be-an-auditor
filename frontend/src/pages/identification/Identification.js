@@ -5,6 +5,8 @@ import Button from "@mui/material/Button";
 import Popper from "@mui/material/Popper";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
+import { useNavigate } from "react-router-dom";
+
 import "../../index.css";
 import "../../components/Welcome/BeginPage.css";
 
@@ -12,7 +14,7 @@ const correctAnswers = {
   firstname: "Mona",
   lastname: "Lisa",
   "mailing-address": "1479 Mona Lisa Street",
-  city: "Florence ITA",
+  city: "London",
   prov: "Ontario",
   sin: "900700500",
   birth: "15 Jun/Juin 1479",
@@ -65,6 +67,8 @@ const Identification = () => {
 
   const [currentLives, setCurrentLives] = useState(2);
 
+  const navigate = useNavigate();
+
   const handleClick = (event, correctAnswer) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
     setPopperContent(correctAnswer);
@@ -105,7 +109,12 @@ const Identification = () => {
     });
     setShowCorrectAnswers(newShowCorrectAnswers);
 
-    if (!allCorrect) {
+    if(currentLives == 0){
+      navigate("/gameover");
+    }
+    if (allCorrect && currentLives > 0) {
+      navigate("/level2");
+    } else if (!allCorrect && currentLives > 0) {
       setCurrentLives((prevLives) => prevLives - 1);
     }
   };
@@ -527,9 +536,10 @@ const Identification = () => {
         <div>
           {" "}
           <div>
-            {[...Array(currentLives)].map((_, index) => (
-              <HeartIcon key={index} />
-            ))}
+            {currentLives > 0 &&
+              [...Array(currentLives)].map((_, index) => (
+                <HeartIcon key={index} />
+              ))}
           </div>
         </div>
 
