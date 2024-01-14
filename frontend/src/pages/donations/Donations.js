@@ -93,7 +93,7 @@ const Donations = () => {
     setFields(newFields);
 
     if (allCorrect && currentLives > 0) {
-      navigate("/");
+      navigate("/gamewon");
     } else if (!allCorrect) {
       setCurrentLives((prevLives) => prevLives - 1);
     }
