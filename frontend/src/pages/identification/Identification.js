@@ -278,7 +278,7 @@ const Identification = () => {
                                   ...provided.draggableProps.style,
                                   zIndex: 1000,
                                   textAlign: "left",
-                                
+                                  height: 40
                                 }}
                                 className="text-black form-font text-sm"
                               >
