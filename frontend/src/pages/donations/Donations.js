@@ -4,11 +4,13 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import transition from "../../components/Typing/transition";
 
 import { useNavigate } from "react-router-dom";
 
 import "../../index.css";
 import "../../components/Welcome/BeginPage.css";
+import mouse from "../../sound/mouse.mp3"
 
 const correctAnswers = {
   field1: 60,
@@ -85,6 +87,7 @@ const Donations = () => {
   }, [currentLives])
 
   const handleSubmit = () => {
+    audio.play();
     let allCorrect = true;
     const newFields = {};
     Object.keys(fields).forEach((name) => {
@@ -110,6 +113,8 @@ const Donations = () => {
   const HeartIcon = () => {
     return <FavoriteIcon fontSize="large" color="error" />;
   };
+
+  const audio = new Audio(mouse);
 
   return (
     <div className="PageBackground overflow-y-auto overflow-x-auto">
@@ -193,4 +198,4 @@ const Donations = () => {
   );
 };
 
-export default Donations;
+export default transition(Donations);
