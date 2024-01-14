@@ -146,7 +146,7 @@ const Identification = () => {
       </p>
       <div className="flex justify-center items-center gap-x-12">
         <DragDropContext onDragEnd={onDragEnd}>
-          <div className="bg-[#fcfdf7] text-black b-8 pb-8 w-1/3 h-[70vh] rounded-2xl custom-shadow">
+          <div className="bg-[#fcfdf7] text-black b-8 pb-8 w-1/3 h-[75%] rounded-2xl custom-shadow">
             <div className="bg-[#f6da74] rounded-t-2xl w-full p-4 form-font text-lg ">
               Step 1 - Identification and Other Information
             </div>
@@ -177,15 +177,11 @@ const Identification = () => {
                               padding: "5px 10px",
                               backgroundColor: "#fff",
                               display: "flex",
-                              height: 50,
                               alignItems: "center",
-                              width: 200
-                              // position: "fixed",
-
                             }}
                             className="text-black form-font text-sm"
                           >
-                            {question.answer || "                "}
+                            {question.answer || "Drag Your Choice to Here"}
                           </div>
                         </div>
                         {!question.isCorrect && question.answer && (
@@ -278,7 +274,6 @@ const Identification = () => {
                                   ...provided.draggableProps.style,
                                   zIndex: 1000,
                                   textAlign: "left",
-                                  height: 40
                                 }}
                                 className="text-black form-font text-sm"
                               >
@@ -573,3 +568,4 @@ const Identification = () => {
 };
 
 export default transition(Identification);
+
