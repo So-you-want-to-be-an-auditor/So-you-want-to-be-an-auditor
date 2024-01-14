@@ -11,8 +11,8 @@ import "../../index.css";
 import "../../components/Welcome/BeginPage.css";
 
 const correctAnswers = {
-  field1: 80,
-  field2: 0,
+  field1: 60,
+  field2: 20,
   field3: 20,
   field4: 20,
   field5: 120,
@@ -94,11 +94,11 @@ const Donations = () => {
 
     if (allCorrect && currentLives > 0) {
       navigate("/gamewon");
-    } else if (!allCorrect) {
+    } else if (!allCorrect && currentLives > 0) {
       setCurrentLives((prevLives) => prevLives - 1);
     }
 
-    if (currentLives < 0) {
+    if (currentLives == 0) {
       navigate("/gameover");
     }
   };

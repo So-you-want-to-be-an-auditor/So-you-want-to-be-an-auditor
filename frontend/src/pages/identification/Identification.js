@@ -109,14 +109,13 @@ const Identification = () => {
     });
     setShowCorrectAnswers(newShowCorrectAnswers);
 
+    if(currentLives == 0){
+      navigate("/gameover");
+    }
     if (allCorrect && currentLives > 0) {
       navigate("/level2");
-    } else if (!allCorrect) {
+    } else if (!allCorrect && currentLives > 0) {
       setCurrentLives((prevLives) => prevLives - 1);
-    }
-
-    if (currentLives < 0) {
-      navigate("/gameover");
     }
   };
 
