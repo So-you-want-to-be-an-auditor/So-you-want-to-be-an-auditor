@@ -144,21 +144,23 @@ def write_information_embeddings(client: object, input: str, url: str):
     """
     # Split descriptions to be within Cloudflare token limit (512)
     split_input = split_string_with_limit(input, 300, tiktoken.get_encoding("cl100k_base"))
-    print(split_input)
-    time.sleep(0.2)
+    # print(split_input)
+    # time.sleep(0.2)
     response = generate_embeddings({"text": split_input})
-    if response['success']:
-        response = response['result']['data']
-        embeddings = np.array(response, dtype=np.float32)
+    while not response['success']:
+        response = generate_embeddings({"text": split_input})
+    # if response['success']:
+    response = response['result']['data']
+    embeddings = np.array(response, dtype=np.float32)
 
-        # Write to Redis
-        for i, embedding in enumerate(embeddings):
-            client.hset(f"doc:{str((hashlib.sha256(split_input[i].encode('UTF-8'))).hexdigest())}", mapping={
-                "vector": embedding.tobytes(),
-                "content": split_input[i],
-                "tag": "cloudflare",
-                "url": url
-            })
+    # Write to Redis
+    for i, embedding in enumerate(embeddings):
+        client.hset(f"doc:{str((hashlib.sha256(split_input[i].encode('UTF-8'))).hexdigest())}", mapping={
+            "vector": embedding.tobytes(),
+            "content": split_input[i],
+            "tag": "cloudflare",
+            "url": url
+        })
 
 
 def write_chat_embeddings(client: object, input: str, time_stamp: str):
@@ -172,7 +174,10 @@ def write_chat_embeddings(client: object, input: str, time_stamp: str):
     # Split descriptions to be within Cloudflare token limit (512)
     split_input = split_string_with_limit(input, 300, tiktoken.get_encoding("cl100k_base"))
     # print(split_input)
-    response = generate_embeddings({"text": split_input})['result']['data']
+    response = generate_embeddings({"text": split_input})
+    while not response['success']:
+        response = generate_embeddings({"text": split_input})
+    response = response['result']['data']
     embeddings = np.array(response, dtype=np.float32)
 
     # Write to Redis

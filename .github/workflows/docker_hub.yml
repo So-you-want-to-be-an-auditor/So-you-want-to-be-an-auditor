@@ -2,10 +2,10 @@ name: FastAPI Docker Build and Push to Docker Hub
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - backend
-      - main
+#  push:
+#    branches:
+#      - backend
+#      - main
 
 jobs:
   build:
