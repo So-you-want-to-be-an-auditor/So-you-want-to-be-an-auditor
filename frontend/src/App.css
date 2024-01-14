@@ -30,7 +30,7 @@
   position: fixed;
   left: auto;
   top: 50px;
-  right:20%;
+  right:10%;
   cursor: pointer;
   z-index: 10000;
 }

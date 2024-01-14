@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import CursorBlinker from "./CursorBlinker";
 import transition from './transition';
 function TypingEffect() {
-    const baseText = "Welcome to ..., the thrilling adventure where you embark on a journey to become the ultimate tax auditor and conquer the financial frontier! As a newly recruited tax auditor, your mission is to navigate through the complex world of tax forms, uncover hidden deductions, and ensure that every taxpayer's financial universe is in perfect order.";
+    const baseText = "Welcome to So you want to be an Auditor, the thrilling adventure where you embark on a journey to become the ultimate tax auditor and conquer the financial frontier! As a newly recruited tax auditor, your mission is to navigate through the complex world of tax forms, uncover hidden deductions, and ensure that every taxpayer's financial universe is in perfect order.";
     const count = useMotionValue(0);
     const rounded = useTransform(count, (latest) => Math.round(latest));
     const displayText = useTransform(rounded, (latest) =>
