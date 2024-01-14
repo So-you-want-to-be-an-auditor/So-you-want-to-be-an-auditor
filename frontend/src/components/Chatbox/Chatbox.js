@@ -9,6 +9,7 @@ const ChatBox = ({messages, setMessages, inputText, setInputText, loading, setLo
   const handleInputChange = event => {
     setInputText(event.target.value);
   };
+  
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -21,13 +22,15 @@ const ChatBox = ({messages, setMessages, inputText, setInputText, loading, setLo
       try {
         setLoading(true); // Start loading
         const response = await axios.post(
-          'https://memoritoo-server.onrender.com/vnhub',
+          'http://localhost:8000/v1/query',
           {
-            message: inputText,
+            query: inputText,
+            time_stamp: "1705166849"
           }
         );
+        console.log("response:", response);
 
-        const aiResponse = response.data.answer;
+        const aiResponse = response.data.result.response;
         setMessages(prevMessages => [
           ...prevMessages,
           { text: aiResponse, isUser: false },
