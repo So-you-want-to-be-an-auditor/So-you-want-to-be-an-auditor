@@ -177,8 +177,9 @@ const Identification = () => {
                               padding: "5px 10px",
                               backgroundColor: "#fff",
                               display: "flex",
-                              height: 40,
+                              height: 50,
                               alignItems: "center",
+                              width: 200
                               // position: "fixed",
 
                             }}
@@ -277,6 +278,7 @@ const Identification = () => {
                                   ...provided.draggableProps.style,
                                   zIndex: 1000,
                                   textAlign: "left",
+                                
                                 }}
                                 className="text-black form-font text-sm"
                               >
